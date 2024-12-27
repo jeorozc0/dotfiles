@@ -139,7 +139,7 @@
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-\\": "workspace::ToggleBottomDock"
+      "ctrl-`": "workspace::ToggleBottomDock"
     }
   },
   {

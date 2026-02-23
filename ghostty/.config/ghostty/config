@@ -2,7 +2,6 @@ theme = catppuccin-mocha
 
 font-family = JetBrains Mono
 font-size = 16
-adjust-window-size-when-changing-font-size = false
 
 cursor-style = block
 cursor-style-blink = false

@@ -28,25 +28,26 @@ git clone <your-repo-url> ~/dotfiles
 cd ~/dotfiles
 ```
 
-Stow the packages you want:
+For a fresh machine, run one command:
 
 ```bash
-stow --target="$HOME" zsh tmux homebrew nvim
+./script/install
 ```
 
-For Ghostty and Zed on an existing machine (where files already exist), adopt first:
+For an existing machine where files already exist, adopt first:
 
 ```bash
-stow --target="$HOME" --adopt ghostty zed
+./script/adopt
 ```
 
 Then keep everything in sync with:
 
 ```bash
-stow --target="$HOME" --restow zsh tmux homebrew nvim ghostty zed
+./script/restow
 ```
 
 ## Notes
 
 - Homebrew dependencies are declared in `homebrew/Brewfile`.
 - Generated editor state (for example Zed databases) is intentionally ignored.
+- Managed stow packages: `zsh`, `tmux`, `homebrew`, `nvim`, `ghostty`, `zed`.

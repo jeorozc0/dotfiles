@@ -1,10 +1,9 @@
 return {
-  { "kdheepak/monochrome.nvim" },
-  { "Luxed/ayu-vim" },
+  { "catppuccin/nvim", name = "catppuccin" },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "ayu",
+      colorscheme = "catppuccin-mocha",
     },
   },
 }

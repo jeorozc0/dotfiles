@@ -39,8 +39,5 @@ if command -v fd >/dev/null 2>&1; then
 fi
 
 setopt PROMPT_SUBST
-if command -v vcprompt >/dev/null 2>&1; then
-  PROMPT='▲  ${(%):-%1~}/ %F{yellow}$(vcprompt -f "(%b) ")%f'
-else
-  PROMPT='▲  ${(%):-%1~}/ '
-fi
+PROMPT='Hi '
+RPROMPT=''

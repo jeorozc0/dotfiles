@@ -39,5 +39,5 @@ if command -v fd >/dev/null 2>&1; then
 fi
 
 setopt PROMPT_SUBST
-PROMPT='Hi '
+PROMPT='${(%):-%1~} %# '
 RPROMPT=''

@@ -1,10 +1,9 @@
 .DS_Store
-.config/.DS_Store
-.config/**/.DS_Store
+**/.DS_Store
 
 # Zed generated state
-.config/zed/embeddings/
-.config/zed/prompts/
+zed/.config/zed/embeddings/
+zed/.config/zed/prompts/
 
 # Editor and shell noise
 *.log

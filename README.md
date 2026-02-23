@@ -1,34 +1,26 @@
-# My dotfiles
+# Dotfiles
 
-This directory contains the dotfiles for my system
+Personal macOS dotfiles for a Ghostty + Zed + Neovim + tmux workflow.
 
 ## Requirements
 
-Ensure you have the following installed on your system
+Install the base tools first:
 
-### Git
-
-```
-brew install git
+```bash
+brew install git stow
 ```
 
-### Stow
+## Setup
 
-```
-brew install stow
-```
+Clone this repository to your home directory and stow it:
 
-## Installation
-
-First, check out the dotfiles repo in your $HOME directory using git
-
-```
-git clone git@github.com/dreamsofautonomy/dotfiles.git
-cd dotfiles
-```
-
-then use GNU stow to create symlinks
-
-```
+```bash
+git clone <your-repo-url> ~/dotfiles
+cd ~/dotfiles
 stow .
 ```
+
+## Notes
+
+- Homebrew dependencies are declared in `Brewfile`.
+- Generated editor state (for example Zed databases) is intentionally ignored.

@@ -1,24 +1,26 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
-export PATH
-export PATH=$PATH:/Users/jeorozco/Library/Python/3.9/bin
-export PATH="$HOME/.local/bin:$PATH"
+typeset -U path PATH
+path=(
+  "$HOME/.local/bin"
+  "$HOME/Library/Python/3.9/bin"
+  $path
+)
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/themesset -g @plugin 'git@bitbucket.com:user/plugin'
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -112,12 +114,11 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vi=lvim
-alias vim=lvim
-alias nvim=lvim
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 # ---- FZF -----
+alias vim="nvim"
+alias vi="nvim"
 
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
@@ -145,24 +146,35 @@ _fzf_compgen_dir() {
 alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
 
 # bun completions
-[ -s "/Users/jeorozco/.bun/_bun" ] && source "/Users/jeorozco/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+path=("$BUN_INSTALL/bin" $path)
 alias python=/usr/bin/python3
 
-if [ "$(arch)" = "arm64" ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-else
-    eval "$(/usr/local/bin/brew shellenv)"
-fi
-export PATH="/usr/local/opt/game-porting-toolkit/bin:$PATH"
-
-GOPATH=$HOME/go  PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
-
-export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+export GOPATH="$HOME/go"
+path=(
+  "/opt/homebrew/opt/postgresql@16/bin"
+  "/usr/local/go/bin"
+  "$GOPATH/bin"
+  $path
+)
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# Enable prompt substitution so $() and ${…} are expanded in PROMPT
+setopt PROMPT_SUBST
+
+# Left prompt: working dir + VCS branch
+PROMPT='▲  ${(%):-%1~}/ %F{yellow}$(vcprompt -f "(%b) ")%f'
+
+# Right prompt: elapsed time in ms
+export RPROMPT="%F{240}${elapsed}ms %{$reset_color%}"
+
+
+# opencode
+path=("$HOME/.opencode/bin" $path)
